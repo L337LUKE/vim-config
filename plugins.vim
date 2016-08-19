@@ -18,18 +18,19 @@ call vundle#begin()
 
 " Essential
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-vinegar'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'mileszs/ack.vim'
+Plugin 'neomake/neomake'
 Plugin 'skwp/greplace.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'mileszs/ack.vim'
 
 " Utiltity
 Plugin 'tpope/vim-surround'
 Plugin 'mattn/webapi-vim' " dependency of 'mattn/gist-vim'
 Plugin 'mattn/gist-vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/syntastic'
 
 " Editing
 Plugin 'tomtom/tcomment_vim'
