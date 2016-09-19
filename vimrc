@@ -153,7 +153,8 @@ let g:NERDTreeWinSize = 40                      "Set NERDTree window size"
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-nmap <D-1> :NERDTreeToggle<cr>                  "NerdTree toggle"
+"NerdTree toggle"
+nmap <D-1> :NERDTreeToggle<cr>
 
 "/
 "/ Greplace.vim
