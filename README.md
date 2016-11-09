@@ -11,6 +11,10 @@ Some config to get me up and running when using vim.
 
 [dracula](https://draculatheme.com/vim/)
 
+[Universal ctags](https://ctags.io/)
+
+1. Make sure vim is compiled with LUA (neocomplete requirement)
+
 ## Key Bindings
 ---
 Leader Key: `,`
