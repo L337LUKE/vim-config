@@ -1,9 +1,14 @@
+# Ctags options
 --recurse=yes
+
+# Global
 --exclude=.git/*
 --exclude=node_modules/*
 --exclude=vendor/*
 --exclude=db/*
 --exclude=log/*
+
+# Laravel
 --exclude=storage/*
 --exclude=bootstrap/cache/*
 --exclude=laradock/*
