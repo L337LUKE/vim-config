@@ -1,0 +1,9 @@
+--recurse=yes
+--exclude=.git/*
+--exclude=node_modules/*
+--exclude=vendor/*
+--exclude=db/*
+--exclude=log/*
+--exclude=storage/*
+--exclude=bootstrap/cache/*
+--exclude=laradock/*

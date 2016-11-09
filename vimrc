@@ -3,6 +3,16 @@ so ~/.vim/plugins.vim                   "Load External plugins file for cleaner 
 
 
 
+"----------gui macvim specific----------""
+if has('gui_macvim') 
+    "Disable default cmd+option key bindings from macvim"
+    let macvim_skip_cmd_opt_movement = 1
+    
+    " Disable print key for macvim
+    macmenu &File.Print key=<nop>
+endif
+
+
 "----------General Settings----------"
 let mapleader=','                       "change leader from backslash to comma to"
 set shell=/bin/zsh                      "Tell vim to use the zsh shell"
@@ -25,9 +35,9 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 "Control autocompletion
 filetype plugin indent on   
 filetype plugin on
-au FileType php setl ofu=phpcomplete#CompletePHP
-au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
-au FileType css, scss setl ofu=csscomplete#CompleteCSS
+"au FileType php setl ofu=phpcomplete#CompletePHP
+"au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
+"au FileType css, scss setl ofu=csscomplete#CompleteCSS
 
 
 
@@ -46,7 +56,7 @@ set textwidth=0 wrapmargin=0            "Stops vim auto-wrapping lines
 
 "-------------Visual----------------"
 syntax on                               "Enable Syntax Highlighting"
-set guifont=Fira_code:h16           	"Set font"
+set guifont=Fira_code:h15           	"Set font"
 color dracula                           "Set our colourscheme"
 set t_CO=256                    	    "Use 256 colours if using terminal vim"
 set guioptions-=e                       "Simple/minimal tabs"
@@ -126,6 +136,22 @@ autocmd BufNewFile,BufRead *.scss   set ft=scss.css
 
 "-------------------Plugins-------------------"
 "/
+"/ Syntastic
+"/
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height=2
+
+let g:syntastic_php_checkers = ['php']
+
+
+"/
 "/ Gist-vim
 "/
 let g:github_user = 'L337LUKE'
@@ -153,7 +179,8 @@ let g:NERDTreeWinSize = 40                      "Set NERDTree window size"
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-nmap <D-1> :NERDTreeToggle<cr>                  "NerdTree toggle"
+" Toggle Nerdtree
+nmap <D-1> :NERDTreeToggle<cr>
 
 "/
 "/ Greplace.vim
@@ -166,12 +193,47 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 "/
 "/ The Silver Searcher / Ag
 "/
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg ='ag --nogroup --nocolor --column'
 
 "/
-"/ YouCompleteMe
+"/ NeoComplete
 "/
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:neocomplete#enable_at_startup = 1                     "Use NeoComplete
+let g:neocomplete#enable_smart_case = 1                     "Enable SmartCase
+let g:neocomplete#sources#syntax#min_keyword_length = 3     "Set min key length
+let g:acp_enableAtStartup = 0                               "Disable AutoComplPop
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+
+
+"/
+"/ phpcomplete
+"/
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_search_tags_for_variables = 1
+let g:phpcomplete_min_num_of_chars_for_namespace_completion = 2
+
+
+"/
+"/ vim-php-cs-fixer
+"/
+let g:php_cs_fixer_level ="psr2"                   " PHP Formatting we want
+let g:php_cs_fixer_fixers_list="-psr0"              " Disable PSR-0
+let g:php_cs_fixer_enable_default_mapping = 0       " Disable default mappings
+
+
+
+
+"-------------- Functions ----------------"
+" Save/run CSFixer - <leader>pf
+so ~/.vim/functions.vim                   "Source function file
+
 
 
 
@@ -208,7 +270,8 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 " SEARCHING
 " `!ctags -R`                                   - Generate tags file in current directory
 " `leader f`                                    - Mapping to start searching for a tag
-" `ctrl+]`                                      - Goto method under cursor
+" `shift+ctrl+]`                                - Jump to method under cursor
+" `shift+ctrl+t`                                - Jump back from definition    
 " `/ {query}`                                   - Search for stuff
 " `v {select lines} - :s/query/replacement      - Replace multiple lines from visual select
 " `Gsearch`                                     - Search for search term in multiple files
@@ -218,4 +281,3 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " NERDTreee
 " `⇧+a`                                         - Toggle NERDTree between sidebar width and full screen
-
